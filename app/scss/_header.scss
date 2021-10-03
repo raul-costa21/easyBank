@@ -1,0 +1,118 @@
+.header {
+  // Hamburger Open Styles
+
+  // these animations get trigger when open class is added to header class (header open)
+  &.open {
+    .header__toggle {
+      > span:first-child {
+        transform: rotate(45deg);
+      }
+      > span:nth-child(2) {
+        opacity: 0;
+      }
+      > span:last-child {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+
+  .overlay {
+    // visibility is hidden (we add a different class for that) and opacity 0 animations change this in order to show div
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-image: linear-gradient($darkBlue, transparent);
+    z-index: 2;
+  }
+
+  nav {
+    position: relative;
+    background-color: $white;
+    padding-top: 1.0625rem;
+    padding-bottom: 1.0625rem;
+    z-index: 2;
+  }
+
+  &__logo {
+    img {
+      width: 8.8125rem;
+      height: 1.375rem;
+    }
+  }
+
+  &__toggle {
+    // mobile menu
+    > span {
+      // span that is direct child of class header_logo
+      display: block;
+      width: 26px;
+      height: 2px;
+      background-color: $darkBlue;
+      transition: all 300ms ease-in-out;
+      transform-origin: 3px 1px;
+
+      &:not(:last-child) {
+        // apply to everyone  but the last child
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    width: calc(100% - 3rem); // width of 100% - the left and right margin (1.5rem)
+    // center image:
+    left: 50%;
+    transform: translateX(-50%); // we move menu left 50% (stays in the middle of screen) then translateX makes the menu move on itself (50% back)
+
+    margin-top: 1.5rem;
+    background: $white;
+    padding: 1.625rem;
+    border-radius: 5px;
+
+    z-index: 2;
+
+    a {
+      display: block;
+      color: $darkBlue;
+      padding: 0.625rem;
+      text-align: center;
+    }
+  }
+
+  &__links {
+    a {
+      position: relative;
+      font-size: $font-sm;
+      color: $grayishBlue;
+      transition: color 300ms ease-in-out;
+
+      &:not(:last-child) {
+        margin-right: 32px;
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        display: block;
+        height: 5px;
+        left: 0;
+        right: 0;
+        bottom: -30px;
+        background: linear-gradient(to left, $limeGreen, $brightCyan);
+        opacity: 0; // the background appears but we are not going to see it; only when hover it we trigger the animation
+        transition: opacity 300ms ease-in-out;
+      }
+
+      &:hover {
+        color: $darkBlue;
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
